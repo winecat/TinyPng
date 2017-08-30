@@ -14,7 +14,7 @@ version = "1.0.1"				# 版本
 
 
 ## 获取当前的所有 API KEYS
-keys = calckeys.get_keys()
+keys = calckeys.get_keys_conf()
 
 # 压缩的核心
 def compress_core(key, inputFile, outputFile, img_width):
@@ -54,9 +54,8 @@ def compress_path(path, width):
 					keyDict = calckeys.check_available_key(keys)
 					if keyDict is not None:
 						compress_core(keyDict['key_id'], root + '/' + name, toFullName, width)
-						keyDict['key_count'] = keyDict['key_count'] + 1
-						keyDict['key_count'] = time.time()
-						keys[keyDict['key_id'] = keyDict
+						keyDict = calckeys.update_key_count(keyDict)#更新次数
+						keys[keyDict['key_id']] = keyDict
 					else:
 						print "没有可用的key 次数了!"
 						
@@ -76,9 +75,8 @@ def compress_file(inputFile, width):
 		keyDict = calckeys.check_available_key(keys)
 		if keyDict is not None:
 			compress_core(inputFile, dirname+"/tiny_"+basename, width)
-			keyDict['key_count'] = keyDict['key_count'] + 1
-			keyDict['key_count'] = time.time()
-			keys[keyDict['key_id'] = keyDict
+			keyDict = calckeys.update_key_count(keyDict)#更新次数
+			keys[keyDict['key_id']] = keyDict
 		else:
 			print "没有可用的key 次数了!"
 	else:
