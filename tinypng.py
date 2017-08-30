@@ -6,12 +6,19 @@ import sys
 import os.path
 import click
 import tinify
+import calckeys
+import time
 
-tinify.key = "在此处填写你申请的API"		# API KEY
+#tinify.key = "Ta-j0tLSotdqVhsAH-PZZ60_kiY20LX1"		# API KEY
 version = "1.0.1"				# 版本
 
+
+## 获取当前的所有 API KEYS
+keys = calckeys.get_keys()
+
 # 压缩的核心
-def compress_core(inputFile, outputFile, img_width):
+def compress_core(key, inputFile, outputFile, img_width):
+	tinify.key = key ## 这里赋值 API KEY
 	source = tinify.from_file(inputFile)
 	if img_width is not -1:
 		resized = source.resize(method = "scale", width  = img_width)
@@ -44,7 +51,15 @@ def compress_path(path, width):
 						pass
 					else:
 						os.mkdir(toFullPath)
-					compress_core(root + '/' + name, toFullName, width)
+					keyDict = calckeys.check_available_key(keys)
+					if keyDict is not None:
+						compress_core(keyDict['key_id'], root + '/' + name, toFullName, width)
+						keyDict['key_count'] = keyDict['key_count'] + 1
+						keyDict['key_count'] = time.time()
+						keys[keyDict['key_id'] = keyDict
+					else:
+						print "没有可用的key 次数了!"
+						
 			break									# 仅遍历当前目录
 
 # 仅压缩指定文件
@@ -58,7 +73,14 @@ def compress_file(inputFile, width):
 	basename = os.path.basename(inputFile)
 	fileName, fileSuffix = os.path.splitext(basename)
 	if fileSuffix == '.png' or fileSuffix == '.jpg' or fileSuffix == '.jpeg':
-		compress_core(inputFile, dirname+"/tiny_"+basename, width)
+		keyDict = calckeys.check_available_key(keys)
+		if keyDict is not None:
+			compress_core(inputFile, dirname+"/tiny_"+basename, width)
+			keyDict['key_count'] = keyDict['key_count'] + 1
+			keyDict['key_count'] = time.time()
+			keys[keyDict['key_id'] = keyDict
+		else:
+			print "没有可用的key 次数了!"
 	else:
 		print "不支持该文件类型!"
 
@@ -70,13 +92,15 @@ def run(file, dir, width):
 	print ("GcsSloop TinyPng V%s" %(version))
 	if file is not None:
 		compress_file(file, width)				# 仅压缩一个文件
+		calckeys.write_file(keys)
 		pass
 	elif dir is not None:
 		compress_path(dir, width)				# 压缩指定目录下的文件
+		calckeys.write_file(keys)
 		pass
 	else:
 		compress_path(os.getcwd(), width)		# 压缩当前目录下的文件
-	print "结束!"
+	print "COMPRESS FILES SUCCEED...END!!!"
 
 if __name__ == "__main__":
     run()
