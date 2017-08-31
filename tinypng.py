@@ -9,6 +9,8 @@ import click
 import tinify
 import calckeys
 import time
+reload(sys)
+print sys.setdefaultencoding('utf-8')
 
 #tinify.key = "Ta-j0tLSotdqVhsAH-PZZ60_kiY20LX1"		# API KEY
 version = "1.0.1"				# 版本
