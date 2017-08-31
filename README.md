@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ![version](https://img.shields.io/badge/version-1.0.1-brightgreen.svg)
 
-### 此工具来源：[GcsSloop](https://github.com/GcsSloop/TinyPngp)
+### 此工具来源：[GcsSloop](https://github.com/GcsSloop/TinyPng)
 
 ![](http://ww4.sinaimg.cn/large/005Xtdi2gw1f4kksnoy72j313y07yjuk.jpg)
 
