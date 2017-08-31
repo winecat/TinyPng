@@ -4,6 +4,7 @@
 import os
 import sys
 import os.path
+sys.path.insert(0, 'E:\ProgramData\Anaconda2\Lib\site-packages') ## 本地加载 click模块，正常安装不需要这样子配置
 import click
 import tinify
 import calckeys

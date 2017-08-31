@@ -41,7 +41,10 @@ def check_available_key(keys):
         keyTime = int(v['key_time'])
         keyCount = int(v['key_count'])
         diff = nowTime - keyTime
-        if diff >= one_month_second or keyCount < 500:
+        if diff >= one_month_second:
+            v['key_count'] = 0
+        keyCount = int(v['key_count'])
+        if keyCount < 500:
             if 'key_id' in min:
                 hasKeyCount = min['key_count']
                 if hasKeyCount > keyCount:
