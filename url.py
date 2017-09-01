@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+__author__ = 'https://x-mars.cc'
 
 import urllib
 import httplib 
@@ -10,7 +11,7 @@ sys.path.insert(0, 'E:\ProgramData\Anaconda2\Lib\site-packages') ## 本地加载
 import requests, json
 
 def do_url_request(numStr):
-    payload = json.dumps({'fullName': 'x' + numStr, 'mail': 'x' + numStr + '@x-mars.cc'}) # 此处将POST的数据定义为一个字典
+    payload = json.dumps({'fullName': 'x' + numStr, 'mail': 'x' + numStr + '@x-mars.cc'}) # 此处将POST的数据定义为一个字典,填上对应自己的邮箱域名
     print(payload)
     # Headers属性初始化
     headers = {
@@ -35,5 +36,5 @@ def loop_reqest(start, end):
     
 
 if __name__ == "__main__":
-    loop_reqest(16, 66)
+    loop_reqest(269, 300)
     

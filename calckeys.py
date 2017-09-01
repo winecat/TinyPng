@@ -15,12 +15,14 @@ def get_keys_conf():
     line = file.readline()
     while line:
         keyInfo = line.rstrip().strip().split(',')
-        keyDict = {}
-        keyDict['key_id'] = keyInfo[0]
-        keyDict['key_time'] = int(keyInfo[1])
-        keyDict['key_count'] = int(keyInfo[2])
-        keys[keyInfo[0]] = keyDict
-        #print key_dict
+        print keyInfo
+        if len(keyInfo) >= 3:
+            keyDict = {}
+            keyDict['key_id'] = keyInfo[0]
+            keyDict['key_time'] = int(keyInfo[1])
+            keyDict['key_count'] = int(keyInfo[2])
+            keys[keyInfo[0]] = keyDict
+            #print key_dict
         line = file.readline()
     file.close()
     return keys
@@ -43,14 +45,18 @@ def check_available_key(keys):
         diff = nowTime - keyTime
         if diff >= one_month_second:
             v['key_count'] = 0
-        keyCount = int(v['key_count'])
+            min = v
+            break
+            keyCount = int(v['key_count'])
         if keyCount < 500:
             if 'key_id' in min:
                 hasKeyCount = min['key_count']
                 if hasKeyCount > keyCount:
                     min = v
+                    break
             else:
-               min = v 
+               min = v
+               break
     if 'key_id' in min:
         return min
     else:
