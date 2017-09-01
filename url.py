@@ -27,7 +27,7 @@ def do_url_request(numStr):
 ##闭区间请求
 def loop_reqest(start, end):
     tmp = start
-    while tmp =< end:
+    while tmp <= end:
         tmpStr = str(tmp)
         do_url_request(tmpStr)
         tmp = tmp + 1
@@ -35,5 +35,5 @@ def loop_reqest(start, end):
     
 
 if __name__ == "__main__":
-    loop_reqest(11, 15)
+    loop_reqest(16, 66)
     
