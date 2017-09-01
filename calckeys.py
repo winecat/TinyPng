@@ -15,7 +15,7 @@ def get_keys_conf():
     line = file.readline()
     while line:
         keyInfo = line.rstrip().strip().split(',')
-        print keyInfo
+        #print keyInfo
         if len(keyInfo) >= 3:
             keyDict = {}
             keyDict['key_id'] = keyInfo[0]
