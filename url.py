@@ -24,9 +24,10 @@ def do_url_request(numStr):
     res = requests.post(request_url, data=payload, headers=headers)
     print(res.text)
 
+##闭区间请求
 def loop_reqest(start, end):
     tmp = start
-    while tmp < end:
+    while tmp =< end:
         tmpStr = str(tmp)
         do_url_request(tmpStr)
         tmp = tmp + 1
